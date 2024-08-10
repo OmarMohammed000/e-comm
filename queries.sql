@@ -9,7 +9,6 @@ CREATE TABLE users(
 CREATE TABLE admins(
 	key text primary key UNIQUE,
 	id int  REFERENCES users(id),
-	name text 
 );
 CREATE TABLE products(
 	id serial PRIMARY KEY,
@@ -66,4 +65,16 @@ CREATE TABLE order_items(
 	product_id int ,
 	FOREIGN KEY (order_id)REFERENCES orders(id),
 	FOREIGN KEY (product_id) REFERENCES products(id)
+);
+CREATE TABLE tags (
+    tag_id SERIAL PRIMARY KEY,
+    tag_name VARCHAR(50)
+);
+
+CREATE TABLE product_tags (
+    product_id INT,
+    tag_id INT,
+    PRIMARY KEY (product_id, tag_id),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
