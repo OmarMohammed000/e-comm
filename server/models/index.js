@@ -1,5 +1,18 @@
 import { Sequelize } from "sequelize";
-import config from "../config";
+import config from "../config.js";
+// importing the models
+import User from "./UserModel.js";
+import Admin from "./AdminModel.js";
+import Product from "./ProductModel.js";
+import Category from "./CategoriesModel.js";
+import Subcategory from "./SubcategoryModel.js";
+import ProductSubcategory from "./ProductSubcategory.js";
+import Cart from "./CartsModel.js";
+import CartItem from "./CartitemsModel.js";
+import Order from "./OrderModel.js";
+import OrderItem from "./OrderItemModel.js";
+import Tag from "./TagModel.js";
+import ProductTag from "./ProductTagModel.js";
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -15,20 +28,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// importing the models
-import User from "./UserModel";
-import Admin from "./AdminModel";
-import Product from "./ProductModel";
-import Category from "./categoriesModel";
-import Subcategory from "./SubcategoryModel";
-import ProductSubcategory from "./ProductSubcategory";
-import Cart from "./CartsModel";
-import CartItem from "./CartitemsModel";
-import Order from "./OrderModel";
-import OrderItem from "./OrderItemModel";
-import Tag from "./TagModel";
-import ProductTag from "./ProductTagModel";
-import { FOREIGNKEYS } from "sequelize/lib/query-types";
+
+
 
 // Init the models
 db.User = User(sequelize, Sequelize);
@@ -49,8 +50,9 @@ db.ProductTag = ProductTag(sequelize, Sequelize);
 db.User.hasMany(db.Admin, { foreignKey: "id" });
 db.Admin.belongsTo(db.User, { foreignKey: "id" });
 
-db.Category.hasMany(db.Subcategory, { foreignKey: "category_id" });
-db.Subcategory.belongsTo(db.Category, { foreignKey: "category_id" });
+db.Category.hasMany(db.Subcategory, { foreignKey: 'category_id' });
+db.Subcategory.belongsTo(db.Category, { foreignKey: 'category_id' });
+
 
 db.Product.belongsToMany(db.Subcategory, {
   through: db.ProductSubcategory,
@@ -88,4 +90,4 @@ db.Tag.belongsToMany(db.Product, {
   foreignKey: "tag_id",
 });
 
-module.exports = db;
+export default db

@@ -1,8 +1,7 @@
 import { DataTypes } from "sequelize";
-import Subcategory from "./SubcategoryModel";
 
 const ProductSubcategory = (sequelize) => {
-  sequelize.define(
+  return sequelize.define(
     "ProductSubcategory",
     {
       product_id: {

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Order = (sequelize) => {
-  sequelize.define(
+  return sequelize.define(
     "Order",
     {
       id: {

@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 
 const Subcategory = (sequelize) => {
-  sequelize.define(
-    "subcategory",
+  return sequelize.define(
+    "Subcategory",
     {
       id: {
         type: DataTypes.INTEGER,

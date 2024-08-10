@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const CartItem = (sequelize) => {
-  sequelize.define(
+  return sequelize.define(
     "CartItem",
     {
       id: {

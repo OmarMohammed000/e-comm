@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Tag = (sequelize) => {
-  sequelize.define(
+  return sequelize.define(
     "Tag",
     {
       tag_id: {
