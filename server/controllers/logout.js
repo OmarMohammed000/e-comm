@@ -6,7 +6,13 @@ const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET
 async function logout(req,res,next) {
     const {refreshToken}=req.body;
     if (!refreshToken) {
-        return res.status(400).json({ message: "Refresh token is required" });
+        req.logout(function (err) {
+            if (err) {
+              return next(err);
+            }
+            return res.status(200).json({message: "Logged out successfully"});
+          });
+       return
       }
     
       try {
@@ -24,11 +30,11 @@ async function logout(req,res,next) {
             }
     
             // Successfully logged out
-            res.json({ message: "Logged out successfully" });
+           return res.json({ message: "Logged out successfully" });
           });
         } else {
           // If the user does not exist, return a success response to avoid exposing information
-          res.json({ message: "Logged out successfully" });
+          return res.json({ message: "Logged out successfully" });
         }
       } catch (error) {
         return res.status(403).json({ message: "Invalid refresh token" });

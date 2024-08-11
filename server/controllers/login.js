@@ -17,7 +17,8 @@ function loginApp(req, res, next) {
       if (err) {
         return next(err); // Pass any errors to Express
       }
-      //implement the jwt
+      //implement the jwt but only if user is admin
+      if(user.isAdmin){
       const accessToken = jwt.sign(
         { id: user.id, email: user.email },
         JWT_SECRET,
@@ -28,12 +29,18 @@ function loginApp(req, res, next) {
         expiresIn: "7d",
       });
       user.update({refreshToken});
+      
       // Send a success response with user details
       return res.json({
         message: "Login successful",
         user: { id: user.id, email: user.email },accessToken,
         refreshToken,
       });
+      }else{
+        return res.json({
+          message: "Login successful",
+          user: { id: user.id, email: user.email },});
+      }
     });
   })(req, res, next); // Pass the request to Passport's authenticate middleware
 }

@@ -8,6 +8,7 @@ import loginRoute from "./routes/loginRoute.js"
 import registerRoute  from "./routes/registerRoute.js"
 import logout from "./routes/logoutRoute.js";
 import refreshToken from "./routes/refreshTokenRoute.js";
+import admin from "./routes/admin/admin.js"
 const app=express();
 initialize(passport);
 env.config();
@@ -29,6 +30,7 @@ app.use("/",registerRoute);
 app.use("/",loginRoute);
 app.use("/",logout)
 app.use("/",refreshToken)
+app.use("/",admin)
 db.sequelize.sync().then(() => {
     app.listen(3000, () => {
       console.log('Server is running on port 3000');
