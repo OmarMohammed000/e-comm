@@ -8,7 +8,8 @@ import loginRoute from "./routes/loginRoute.js"
 import registerRoute  from "./routes/registerRoute.js"
 import logout from "./routes/logoutRoute.js";
 import refreshToken from "./routes/refreshTokenRoute.js";
-import admin from "./routes/admin/admin.js"
+import admin from "./routes/admin/admin.js";
+import cookieParser from "cookie-parser";
 const app=express();
 initialize(passport);
 env.config();
@@ -22,6 +23,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser());
 
 
 app.use(express.urlencoded({extended:true}));

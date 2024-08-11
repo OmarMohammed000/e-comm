@@ -29,7 +29,7 @@ function loginApp(req, res, next) {
         expiresIn: "7d",
       });
       user.update({refreshToken});
-      
+      res.cookie("jwt", accessToken, { httpOnly: true, secure: true, sameSite: "strict" });
       // Send a success response with user details
       return res.json({
         message: "Login successful",
