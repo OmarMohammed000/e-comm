@@ -15,7 +15,7 @@ const Admin=(sequelize)=>{
             }
         },
     },{
-        tableName:'admin',
+        tableName:'admins',
         timeStamps:false
     })
 }

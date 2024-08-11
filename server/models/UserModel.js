@@ -12,12 +12,20 @@ const User=(sequelize)=>{
       allowNull:false
     },
     password:{
-      type:DataTypes.STRING(50),
+      type:DataTypes.STRING(100),
       allowNull:false
     },
     email:{
       type:DataTypes.STRING(150),
       allowNull:false
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    refreshToken: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
     address:{
       type:DataTypes.TEXT
