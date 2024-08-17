@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import config from "../config.js";
 // importing the models
 import User from "./UserModel.js";
-import Admin from "./AdminModel.js";
+// import Admin from "./AdminModel.js";
 import Product from "./ProductModel.js";
 import Category from "./CategoriesModel.js";
 import Subcategory from "./SubcategoryModel.js";
@@ -13,6 +13,7 @@ import Order from "./OrderModel.js";
 import OrderItem from "./OrderItemModel.js";
 import Tag from "./TagModel.js";
 import ProductTag from "./ProductTagModel.js";
+import Image from "./ProductImagesModel.js"; 
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -33,7 +34,7 @@ db.sequelize = sequelize;
 
 // Init the models
 db.User = User(sequelize, Sequelize);
-db.Admin = Admin(sequelize, Sequelize);
+// db.Admin = Admin(sequelize, Sequelize);
 db.Product = Product(sequelize, Sequelize);
 db.Category = Category(sequelize, Sequelize);
 db.Subcategory = Subcategory(sequelize, Sequelize);
@@ -44,11 +45,12 @@ db.Order = Order(sequelize, Sequelize);
 db.OrderItem = OrderItem(sequelize, Sequelize);
 db.Tag = Tag(sequelize, Sequelize);
 db.ProductTag = ProductTag(sequelize, Sequelize);
+db.Image=Image(sequelize,Sequelize);
 
 // defining relations
 
-db.User.hasMany(db.Admin, { foreignKey: "id" });
-db.Admin.belongsTo(db.User, { foreignKey: "id" });
+// db.User.hasMany(db.Admin, { foreignKey: "id" });
+// db.Admin.belongsTo(db.User, { foreignKey: "id" });
 
 db.Category.hasMany(db.Subcategory, { foreignKey: 'category_id' });
 db.Subcategory.belongsTo(db.Category, { foreignKey: 'category_id' });
@@ -62,6 +64,9 @@ db.Subcategory.belongsToMany(db.Product, {
   through: db.ProductSubcategory,
   foreignKey: "subcategory_id",
 });
+
+db.Product.hasMany(db.Image, { foreignKey: "productId"});
+db.Image.belongsTo(db.Product, { foreignKey: "productId" });
 
 db.User.hasMany(db.Cart, { foreignKey: "user_id" });
 db.Cart.belongsTo(db.User, { foreignKey: "user_id" });

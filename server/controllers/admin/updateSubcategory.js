@@ -19,7 +19,7 @@ async function updateSubcategory(req,res) {
         await subcategory.save();
 
         // Send a success response with the updated category
-        res.json({ message: 'Subcategory updated successfully', subcategory });
+        res.res.status(201).json({ message: 'Subcategory updated successfully', subcategory });
     } catch (error) {
         console.error('Error updating category:', error);
         res.status(500).json({ message: 'An error occurred while updating the category' });

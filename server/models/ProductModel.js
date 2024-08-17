@@ -19,9 +19,13 @@ const Product=(sequelize)=>{
         price:{
             type:DataTypes.DECIMAL(10,2),
             allowNull: false
-        },image_location: {
-            type: DataTypes.TEXT
+        },
+    },
+        {
+            tableName: "products",
+            timestamps: false,
+            
         }
-    })
+    )
 }
 export default Product
