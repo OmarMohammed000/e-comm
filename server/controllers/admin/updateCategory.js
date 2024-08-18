@@ -4,6 +4,9 @@ import db from "../../models/index.js";
 async function updateCategory(req,res) {
     const id = parseInt(req.params.id);
     const {name,details}=req.body;
+    if(isNaN(id)){
+        return res.status(400).json({message:"Invalid category ID"});
+    }
     try {
         const category =await db.Category.findByPk(id);
          // If the category is not found, send a 404 response

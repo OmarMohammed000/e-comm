@@ -1,7 +1,6 @@
 import express from "express";
 import path, { dirname } from "path";
 import multer from "multer";
-import authorizeToken from "../../controllers/admin/authorizeToken.js";
 import createProduct from "../../controllers/admin/createProduct.js";
 import { fileURLToPath } from "url";
 import readProduct from "../../controllers/admin/readProduct.js";
@@ -23,8 +22,8 @@ const storage = multer.diskStorage({
     },
   });
 const upload = multer({storage}).array('images',5);
-router.get("/products",authorizeToken,readProduct);
-router.post("/products",authorizeToken,upload,createProduct);
-router.patch("/products/:id",authorizeToken,upload,updateProductAndImages);
-router.delete("/products/:id",authorizeToken,deleteProduct)
+router.get("/products",readProduct);
+router.post("/products",upload,createProduct);
+router.patch("/products/:id",upload,updateProductAndImages);
+router.delete("/products/:id",deleteProduct)
 export default router;

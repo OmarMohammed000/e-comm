@@ -1,14 +1,13 @@
 import express from "express";
-import authorizeToken from "../../controllers/admin/authorizeToken.js";
 import readSubcategory from "../../controllers/admin/readSubCategory.js";
 import createSubcategory from "../../controllers/admin/createSubcategory.js";
 import updateSubcategory from "../../controllers/admin/updateSubcategory.js";
 import deleteSubcategory from "../../controllers/admin/deleteSubcategory.js";
 
 const router = express.Router();
-router.get("/subcategory",authorizeToken,readSubcategory)
-router.post("/subcategory",authorizeToken,createSubcategory)
-router.patch("/subcategory/:id",authorizeToken,updateSubcategory)
-router.delete("/subcategory/:id",authorizeToken,deleteSubcategory);
+router.get("/subcategories",readSubcategory)
+router.post("/subcategories",createSubcategory)
+router.patch("/subcategories/:id",updateSubcategory)
+router.delete("/subcategories/:id",deleteSubcategory);
 
 export default router;

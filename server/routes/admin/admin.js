@@ -5,13 +5,15 @@ import category from "./categories.js";
 import subcategory from "./subcatogry.js";
 import users from "./users.js";
 import product from "./product.js"
+import tag from "./tag.js";
 
 const router = express.Router();
-router.use("/admin",subcategory)
-router.use("/admin",dashboard);
-router.use("/admin",category);
-router.use("/admin",users);
-router.use("/admin",product);
+router.use("/admin",authorizeToken,subcategory)
+router.use("/admin",authorizeToken,dashboard);
+router.use("/admin",authorizeToken,category);
+router.use("/admin",authorizeToken,users);
+router.use("/admin",authorizeToken,product);
+router.use("/admin",authorizeToken,tag)
 
 router.post("/admin",authorizeToken,(req,res)=>{
     const user=req.user;

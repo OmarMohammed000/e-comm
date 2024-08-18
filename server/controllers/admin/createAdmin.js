@@ -4,8 +4,8 @@ async function createAdmin(req,res) {
     const {userName,password,email,isAdmin}=req.body;
 
     try {
-        if(!userName || !password || !email || !isAdmin ){
-            res.status(400).json({message:"User Name , Password , Email and admin proparty  is required"});
+        if(!userName || !password || !email || isAdmin == null ){
+            res.status(400).json({message:"User Name , Password , Email and admin property is required"});
         }
         // hashing passowrd put not giving it away
         const hashedPassword = await bcrypt.hash(password, 4);
@@ -18,8 +18,8 @@ async function createAdmin(req,res) {
         
         res.status(201).json({ message: "User created successfully" });
     } catch (error) {
-        console.error("Error creating subcategory:", error);
-        res.status(500).json({ message: "An error occurred while creating the subcategory" });
+        console.error("Error creating User:", error);
+        res.status(500).json({ message: "An error occurred while creating the User" });
     
     }
 }

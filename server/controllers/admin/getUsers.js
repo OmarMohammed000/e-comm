@@ -7,7 +7,7 @@ async function getUsers(req,res){
         })
         res.status(200).json(users);
     } catch (error) {
-        console.error("Error fetching subcategories:", error);
+        console.error("Error fetching Users:", error);
         res.status(500).json({ message: "An error occurred while fetching Users" });
     }
 } 

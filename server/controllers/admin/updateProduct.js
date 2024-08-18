@@ -10,6 +10,9 @@ async function updateProductAndImages(req, res) {
   
   const images = req.files ? req.files.map(file => file.filename) : []; 
   // end 
+  if(isNaN(id)){
+    return res.status(400).json({message:"Invalid Product ID"});
+  }
   let transaction  
   try {
     // Start a transaction
