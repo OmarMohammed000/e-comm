@@ -10,7 +10,10 @@ import logout from "./routes/logoutRoute.js";
 import refreshToken from "./routes/refreshTokenRoute.js";
 import admin from "./routes/admin/admin.js";
 import cookieParser from "cookie-parser";
-import home from "./routes/home.js"
+import home from "./routes/home.js";
+import order from "./routes/order.js";
+import cart from "./routes/cart.js";
+
 const app=express();
 initialize(passport);
 env.config();
@@ -35,6 +38,9 @@ app.use("/",logout);
 app.use("/",refreshToken);
 app.use("/",admin);
 app.use("/",home);
+app.use("/",cart);
+app.use("/",order)
+
 db.sequelize.sync().then(() => {
     app.listen(3000, () => {
       console.log('Server is running on port 3000');
