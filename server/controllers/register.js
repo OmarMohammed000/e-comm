@@ -5,7 +5,9 @@ const saltRounds = 4;
 
 async function register(req, res) {
   const { email, password, username, address, phone } = req.body;
-
+  if(!email || !password ||!username ){
+    return res.status(400).json({message:"Username,Password and E-mail are required"});
+  }
   try {
     const existingUser = await db.User.findOne({ where: { email } });
 

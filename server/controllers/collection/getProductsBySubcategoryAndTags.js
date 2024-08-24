@@ -1,7 +1,8 @@
+import { Op } from "sequelize";
 import db from "../../models/index.js";
 
 async function getProductsBySubcategoryAndTags (req, res) {
-    const { subcategoryId } =parseInt( req.params);
+    const  subcategoryId  =parseInt( req.params.subcategoryId);
     if(isNaN(subcategoryId)){
         res.status(403).json({message:"Enter a Vaild ID"})
     };
@@ -15,18 +16,25 @@ async function getProductsBySubcategoryAndTags (req, res) {
   
     try {
       const products = await db.Product.findAll({
-        where: { subcategory_id: subcategoryId },
         include: [
           {
+            model: db.Subcategory,
+            through: { attributes: [] },
+            where: { id: subcategoryId }, 
+          },
+          {
             model: db.Tag,
-            where: { name: tagList },
-            attributes: ['id', 'name'],
-            through: { attributes: [] } // Exclude the ProductTag join table fields
-          }
+            through: { attributes: [] },
+            where: {
+              tag_name: {
+                [Op.in]: tagList
+              }
+            }
+          },
         ],
-        attributes: ['id', 'name', 'price'],
+        attributes: ['id', 'title', 'price'],
       });
-  
+      console.log(products)
       if (products.length === 0) {
         return res.status(404).json({ message: "No products found for this subcategory and tags" });
       }

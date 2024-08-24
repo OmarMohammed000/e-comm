@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import home from "./routes/home.js";
 import order from "./routes/order.js";
 import cart from "./routes/cart.js";
+import products from "./routes/product.js";
 
 const app=express();
 initialize(passport);
@@ -23,7 +24,8 @@ app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -39,7 +41,8 @@ app.use("/",refreshToken);
 app.use("/",admin);
 app.use("/",home);
 app.use("/",cart);
-app.use("/",order)
+app.use("/",order);
+app.use("/",products)
 
 db.sequelize.sync().then(() => {
     app.listen(3000, () => {

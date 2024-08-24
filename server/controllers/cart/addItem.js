@@ -1,19 +1,25 @@
+import { where } from "sequelize";
 import db from "../../models/index.js";
 import { saveCartToLocalStorage } from "./localCartStorage.js";
 
 async function addItem(req,res) {
-    if(!req.isAuthenticated()){
-        return res.status(401).json({ message: "User not authenticated" });
-    }
     const { productId, quantity } = req.body;
     const userId = req.user.id; 
+    if(!productId || !quantity || quantity ===0){
+        return res.status(403).json({
+            message:" invaild product Id or quantity"
+        })
+    }
     try {
         // Find or create a cart for the user
         let cart = await db.Cart.findOne({ where: { user_id: userId } });
         if (!cart) {
             cart = await db.Cart.create({ user_id: userId });
         }
-
+        if( !await db.Product.findOne({where:{id: productId}})){
+            res.status(403).json({message:"Product not found"})
+        }
+        
         // Find or create the cart item
         let cartItem = await db.CartItem.findOne({
             where: { cart_id: cart.id, product_id: productId },
@@ -31,17 +37,18 @@ async function addItem(req,res) {
                 quantity: quantity,
             });
         }
+        // UNCOMMENT IN PRODUCTION
         // Retrieve the updated cart with its items
-        const updatedCart = await db.Cart.findOne({
-            where: { user_id: userId },
-            include: [{ model: db.CartItem, include: [db.Product] }]
-        });
+        // const updatedCart = await db.Cart.findOne({
+        //     where: { user_id: userId },
+        //     include: [{ model: db.CartItem, include: [db.Product] }]
+        // });
 
-        // Convert cart to plain object
-        const plainCart = updatedCart.get({ plain: true });
+        // // Convert cart to plain object
+        // const plainCart = updatedCart.get({ plain: true });
 
-        // Save the updated cart to localStorage
-        saveCartToLocalStorage(plainCart);
+        // // Save the updated cart to localStorage
+        // saveCartToLocalStorage(plainCart);
 
 
         res.status(200).json({ message: "Product added to cart successfully" });

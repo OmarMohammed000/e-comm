@@ -1,3 +1,4 @@
+import db from "../../models/index.js";
 async function deleteItem(req, res)  {
     const { productId } = req.body;
     const userId = req.user.id;

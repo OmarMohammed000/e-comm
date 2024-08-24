@@ -2,6 +2,9 @@ import db from "../../models/index.js"
 
 async function deleteCategory(req,res) {
     const id = parseInt(req.params.id);
+    if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Product ID" });
+    }
     try {
         await db.Category.destroy({ // Corrected spelling
             where: {

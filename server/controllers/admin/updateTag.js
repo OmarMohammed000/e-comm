@@ -14,7 +14,7 @@ async function updateTag(req,res) {
         const tag =await db.Tag.findByPk(id);
         
          if (!tag) {
-            return res.status(404).json({ message: 'Category not found' });
+            return res.status(404).json({ message: 'Tag not found' });
         }
          tag.tag_name = tag_name;
         await tag.save();

@@ -2,8 +2,10 @@ import db from "../../models/index.js";
 
 async function updateProductAndImages(req, res) {
  // this part must be changed after devolping frontend it only made like this for post man
-    const jsonID =JSON.parse( req.body.id);
-  const { id } =jsonID;
+    const jsonID =JSON.parse( req.params.id);
+    
+  const  id  =parseInt(jsonID);
+  
   
   const jsonData = JSON.parse(req.body.data);
   const { title, description, price } = jsonData;

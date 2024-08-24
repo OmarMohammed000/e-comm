@@ -1,9 +1,10 @@
-import db from "../../models";
+import db from "../../models/index.js";
+import { Op } from "sequelize";
 
 async function searchProduct(req,res) {
-    const { q } = req.query; // 'q' is the search query
+    const { product } = req.query; // 'q' is the search query
 
-    if (!q) {
+    if (!product) {
         return res.status(400).json({ message: "Search query is required" });
     }
 
@@ -14,12 +15,12 @@ async function searchProduct(req,res) {
                 [Op.or]: [ 
                     {
                         title: {
-                            [Op.like]: `%${q}%`, // Case-insensitive search in title
+                            [Op.like]: `%${product}%`, // Case-insensitive search in title
                         },
                     },
                     {
                         description: {
-                            [Op.like]: `%${q}%`, // Case-insensitive search in description
+                            [Op.like]: `%${product}%`, // Case-insensitive search in description
                         },
                     },
                 ],

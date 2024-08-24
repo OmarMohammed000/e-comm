@@ -14,6 +14,6 @@ router.post("/tags",createTag);
 router.patch("/tags/:id",updateTag);
 router.delete("/tags/:id",deleteTag);
 // route for adding/removing  tags to products
-router.post("/add-tags",addTag)
-router.delete("/remove-tags",removeTagsFromProduct)
+router.post("/addTags",addTag)
+router.delete("/removeTags",removeTagsFromProduct)
 export default router
