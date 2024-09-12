@@ -1,6 +1,7 @@
 import express from "express"
 import session from "express-session";
 import passport from "passport";
+import cors from "cors"
 import db from "./models/index.js";
 import initialize  from "./passport-config.js";
 import env from "dotenv";
@@ -30,6 +31,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
+app.use(cors())
 
 
 app.use(express.urlencoded({extended:true}));
@@ -45,7 +47,7 @@ app.use("/",order);
 app.use("/",products)
 
 db.sequelize.sync().then(() => {
-    app.listen(5432, () => {
-      console.log('Server is running on port 5432');
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port ${process.env.PORT}` );
     });
   });
