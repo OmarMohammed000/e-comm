@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import config from "../config.js";
+import config from "../utils/config.js";
 // importing the models
 import User from "./UserModel.js";
 // import Admin from "./AdminModel.js";

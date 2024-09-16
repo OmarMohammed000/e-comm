@@ -3,7 +3,7 @@ import session from "express-session";
 import passport from "passport";
 import cors from "cors"
 import db from "./models/index.js";
-import initialize  from "./passport-config.js";
+import initialize  from "./utils/passport-config.js";
 import env from "dotenv";
 import loginRoute from "./routes/loginRoute.js"
 import registerRoute  from "./routes/registerRoute.js"

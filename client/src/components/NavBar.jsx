@@ -34,7 +34,7 @@ function NavBar() {
           >
             <Box
               component="img"
-              src={finalIcon}
+              src="https://res.cloudinary.com/dy7r2qdi0/image/upload/v1726483726/finalIcon_efo3yr.png"
               alt="icon"
               sx={{ width: 100, height: 75 }}
               

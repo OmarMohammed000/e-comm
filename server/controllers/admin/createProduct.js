@@ -1,4 +1,5 @@
 import db from "../../models/index.js";
+import cloudinary from "../../utils/cloudinary-config.js";
 async function createProduct(req, res) {
   try {
     // this part must be changed after devolping frontend it only made like this for post man
@@ -12,15 +13,18 @@ async function createProduct(req, res) {
       price,
     });
 
-    // Save the image paths in the Image table
-    const imagePromises = req.files.map((file) => {
+     // Upload each image to Cloudinary and save the returned URL in the database
+     const imageUploadPromises = req.files.map(async (file) => {
+      const result = await cloudinary.uploader.upload(file.path, {
+        folder: "E-comm/d", 
+      });
       return db.Image.create({
-        image_location: file.filename,
+        image_location: result.secure_url, // Use the URL from Cloudinary
         productId: product.id,
       });
     });
 
-    await Promise.all(imagePromises);
+    await Promise.all(imageUploadPromises);
 
     res
       .status(201)

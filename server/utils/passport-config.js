@@ -1,6 +1,6 @@
 import LocalStrategy from "passport-local";
 import bcrypt from "bcrypt";
-import db from "./models/index.js";
+import db from "../models/index.js";
 
 function initialize(passport) {
   // Define the local strategy for Passport
