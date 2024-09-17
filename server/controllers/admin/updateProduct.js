@@ -1,5 +1,5 @@
 import db from "../../models/index.js";
-
+import cloudinary from "../../utils/cloudinary-config.js";
 async function updateProductAndImages(req, res) {
  // this part must be changed after devolping frontend it only made like this for post man
     const jsonID =JSON.parse( req.params.id);
@@ -10,7 +10,7 @@ async function updateProductAndImages(req, res) {
   const jsonData = JSON.parse(req.body.data);
   const { title, description, price } = jsonData;
   
-  const images = req.files ? req.files.map(file => file.filename) : []; 
+  const images = req.files ? req.files.map(file => file.filename) : console.log("false"); 
   // end 
   if(isNaN(id)){
     return res.status(400).json({message:"Invalid Product ID"});
@@ -37,24 +37,24 @@ async function updateProductAndImages(req, res) {
           where: { productId: id },
           transaction,
         });
-  
+        console.log("in")
         // Then, add the new images
-        const imagePromises = images.map((imagePath) => {
-          return db.Image.create(
-            {
-              image_location: imagePath,
-              productId: id,
-            },
-            { transaction }
-          );
-        });
-  
-        // Wait for all images to be created
-        await Promise.all(imagePromises);
+        const imageUploadPromises = req.files.map(async (file) => {
+          const result = await cloudinary.uploader.upload(file.path, {
+           upload_preset:"esqif1y0"
+           });
+           console.log("uploder")
+           return db.Image.create({
+             image_location: result.secure_url, 
+             productId: id,
+           });
+         });
+         
+         await Promise.all(imageUploadPromises);
       }
     // Commit the transaction
     await transaction.commit();
-
+    console.log("out")
     res
       .status(200)
       .json({ message: "Product and images updated successfully" });

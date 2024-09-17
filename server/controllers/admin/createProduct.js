@@ -15,16 +15,16 @@ async function createProduct(req, res) {
 
      // Upload each image to Cloudinary and save the returned URL in the database
      const imageUploadPromises = req.files.map(async (file) => {
-      const result = await cloudinary.uploader.upload(file.path, {
-        folder: "E-comm/d", 
+       const result = await cloudinary.uploader.upload(file.path, {
+        upload_preset:"esqif1y0"
+        });
+        return db.Image.create({
+          image_location: result.secure_url, // Use the URL from Cloudinary
+          productId: product.id,
+        });
       });
-      return db.Image.create({
-        image_location: result.secure_url, // Use the URL from Cloudinary
-        productId: product.id,
-      });
-    });
-
-    await Promise.all(imageUploadPromises);
+      
+      await Promise.all(imageUploadPromises);
 
     res
       .status(201)
