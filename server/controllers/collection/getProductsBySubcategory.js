@@ -10,6 +10,10 @@ async function getProductsBySubcategory (req, res)  {
         include: {
           model: db.Product,
           attributes: ['id', 'title', 'price'], // Select specific fields from Product
+          include: {
+            model: db.Image, // Include images for each product
+            attributes: ['image_location'], // Select specific fields from Image
+          },
         },
         attributes: ['id', 'name'], // Select specific fields from Subcategory
       });

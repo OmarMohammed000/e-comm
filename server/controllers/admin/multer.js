@@ -1,9 +1,7 @@
 import { fileURLToPath } from "url";
-import path, { dirname } from "path";
+
 import multer from "multer";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
     
@@ -14,6 +12,6 @@ const storage = multer.diskStorage({
     },
   });
 
-const upload = multer({ storage }).array('images', 5); // 'images' is the field name and 10 is the max number of files
+const upload = multer({ storage }).array('images', 5); // 'images' is the field name and 5 is the max number of files
 
 export default upload;

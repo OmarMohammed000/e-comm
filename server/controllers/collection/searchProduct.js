@@ -26,6 +26,10 @@ async function searchProduct(req,res) {
                 ],
             },
             attributes: ['id', 'title', 'description', 'price'], 
+            include: {
+                model: db.Image, // Include images
+                attributes: ['image_location'], // Select the image_location field from the Image model
+              },
         });
 
         res.status(200).json(products);

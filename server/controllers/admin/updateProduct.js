@@ -37,13 +37,12 @@ async function updateProductAndImages(req, res) {
           where: { productId: id },
           transaction,
         });
-        console.log("in")
         // Then, add the new images
         const imageUploadPromises = req.files.map(async (file) => {
           const result = await cloudinary.uploader.upload(file.path, {
            upload_preset:"esqif1y0"
            });
-           console.log("uploder")
+           
            return db.Image.create({
              image_location: result.secure_url, 
              productId: id,
@@ -54,7 +53,7 @@ async function updateProductAndImages(req, res) {
       }
     // Commit the transaction
     await transaction.commit();
-    console.log("out")
+    
     res
       .status(200)
       .json({ message: "Product and images updated successfully" });

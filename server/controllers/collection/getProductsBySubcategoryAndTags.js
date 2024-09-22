@@ -13,28 +13,35 @@ async function getProductsBySubcategoryAndTags (req, res) {
     }
   
     const tagList = tags.split(','); // Convert the comma-separated string into an array
-  
+    
     try {
       const products = await db.Product.findAll({
+        where: {
+          [Op.and]: [
+            { '$Subcategories.id$': subcategoryId }, // Filter by subcategory
+            { '$Tags.tag_name$': { [Op.in]: tagList } } // Filter by tag names
+          ],
+        },
         include: [
           {
             model: db.Subcategory,
             through: { attributes: [] },
-            where: { id: subcategoryId }, 
+            attributes: [], // No need to return subcategory data
           },
           {
             model: db.Tag,
             through: { attributes: [] },
-            where: {
-              tag_name: {
-                [Op.in]: tagList
-              }
-            }
+            attributes: [], // No need to return tag data
+          },
+          {
+            model: db.Image, // Include images for each product
+            attributes: ['image_location'],
           },
         ],
         attributes: ['id', 'title', 'price'],
       });
-      console.log(products)
+  
+      
       if (products.length === 0) {
         return res.status(404).json({ message: "No products found for this subcategory and tags" });
       }
