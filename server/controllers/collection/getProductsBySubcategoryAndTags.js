@@ -41,7 +41,6 @@ async function getProductsBySubcategoryAndTags (req, res) {
         attributes: ['id', 'title', 'price'],
       });
   
-      
       if (products.length === 0) {
         return res.status(404).json({ message: "No products found for this subcategory and tags" });
       }
