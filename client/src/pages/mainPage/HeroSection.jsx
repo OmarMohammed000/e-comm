@@ -3,10 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Box ,Button} from '@mui/material';
 
-// Sample images for the slideshow
-const largeImage = 'https://via.placeholder.com/800x400?text=BESTSELLERS';
-const smallImage1 = 'https://via.placeholder.com/400x200?text=NEW+ARRIVALS';
-const smallImage2 = 'https://via.placeholder.com/400x200?text=HURRY+UP';
+
 
 const HeroSection= () => {
   

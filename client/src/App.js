@@ -3,7 +3,7 @@ import React from "react";
 import MainPage from "./pages/mainPage/MainPage";
 
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import Product from "./components/Product";
+import ProductCard from "./components/ProductCard";
 import SearchResult from "./pages/SearchResult";
 
 const router=createBrowserRouter([{
@@ -11,7 +11,7 @@ const router=createBrowserRouter([{
   element:<MainPage></MainPage>
 },{
   path:`/products/:productId`,
-  element:<Product></Product>
+  element:<ProductCard></ProductCard>
 },{
   path:`/search`,
   element:<SearchResult></SearchResult>

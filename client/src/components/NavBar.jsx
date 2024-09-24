@@ -10,7 +10,6 @@ import {
 
 } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import finalIcon from "../assets/finalIcon.png";
 import theme from "../data/Theme";
 import NavItems from "./NavItems";
 import Search from "./Search";
