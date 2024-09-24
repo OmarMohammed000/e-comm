@@ -18,7 +18,7 @@ function ProductCard(props) {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345, height:550}}>
         <CardActionArea
           onMouseEnter={handleMouseEnter}  // Change image on hover
           onMouseLeave={handleMouseLeave}  // Revert image when hover ends

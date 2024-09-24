@@ -5,6 +5,8 @@ import MainPage from "./pages/mainPage/MainPage";
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import ProductCard from "./components/ProductCard";
 import SearchResult from "./pages/SearchResult";
+import { ThemeProvider } from "@mui/material";
+import theme from "./data/Theme";
 
 const router=createBrowserRouter([{
   path:'/',
@@ -20,7 +22,9 @@ const router=createBrowserRouter([{
 function App() {
   return (
    <>
+    <ThemeProvider theme={theme}>
     <RouterProvider router={router}></RouterProvider>
+    </ThemeProvider>
    </>
   );
 }

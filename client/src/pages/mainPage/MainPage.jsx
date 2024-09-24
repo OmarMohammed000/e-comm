@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar';
 import HeroSection from './HeroSection';
 import { Container } from '@mui/material';
 import ProductsByTag from './ProductsByTag';
+import Aboutus from './Aboutus';
 function MainPage() {
   return (
     <>
@@ -15,6 +16,9 @@ function MainPage() {
     </Container>
     <Container  sx={{mt:5 ,mb:5}}>
       <ProductsByTag displayedTag="NewArrival" tag="New Arrival"></ProductsByTag>
+    </Container>
+    <Container sx={{textAlign:"center", mt:5, mb:5}} maxWidth={false} disableGutters >
+      <Aboutus></Aboutus>
     </Container>
     </>
   )

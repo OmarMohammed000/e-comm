@@ -65,7 +65,6 @@ function ProductByTag(props) {
         const apiCall = `${apiLink}/product/filter?tags=${props.tag}`;
         const response = await axios.get(apiCall);
         setProductData(response.data);
-        console.log(response.data)
        
       } catch (error) {
         setError("Error fetching Products" + error);
@@ -79,12 +78,30 @@ function ProductByTag(props) {
 
   const settings = {
     dots: true,
-    infinite: productData? productData.length > 1:false  ,
-    slidesToShow:productData? Math.min(productData.length, 3):3,
+    infinite: productData ? productData.length > 1 : false,
+    slidesToShow: productData ? Math.min(productData.length, 3) : 3,  // Default is 3 slides
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />, // Custom next arrow
-    prevArrow: <SamplePrevArrow />, // Custom previous arrow
+    nextArrow: <SampleNextArrow />,  // Custom next arrow
+    prevArrow: <SamplePrevArrow />,  // Custom previous arrow
+    responsive: [
+      {
+        breakpoint: 768,  // For screen widths less than 768px
+        settings: {
+          slidesToShow: productData ? Math.min(productData.length, 2) : 2,  // Show 2 slides on mobile
+          slidesToScroll: 1,
+          infinite: productData ? productData.length > 1 : false,
+        },
+      },
+      {
+        breakpoint: 480,  // For screen widths less than 480px (small mobile)
+        settings: {
+          slidesToShow: 1,  // Show only 1 slide on very small screens
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
+  
   if(error)return <div>{error}</div>
  
   return (
