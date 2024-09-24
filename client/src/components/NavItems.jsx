@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Menu, MenuItem, Skeleton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import apiLink from "../data/ApiLink";
 import axios from "axios";
@@ -42,11 +42,12 @@ function NavItems() {
     }
   };
   if (error) return <p>{error}</p>;
-  if (loading) return <p>..loading</p>;
+  
   return (
     <Box sx={{ display: { xs: 'none', sm: 'flex' } ,ml: "auto",mr:"auto" ,pr:5 ,textAlign:"center"}}>
-     
-      {categoriesAndSubCategories.map((category) => (
+      {loading?(<Skeleton variant="text" width="100%" />):(
+
+      categoriesAndSubCategories.map((category) => (
         <Box
           key={category.id}
           id={category.id}
@@ -76,7 +77,8 @@ function NavItems() {
             ))}
           </Menu>
         </Box>
-      ))}
+      )))
+    }
     </Box>
   );
 }

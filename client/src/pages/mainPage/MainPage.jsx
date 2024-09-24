@@ -4,6 +4,7 @@ import HeroSection from './HeroSection';
 import { Container } from '@mui/material';
 import ProductsByTag from './ProductsByTag';
 import Aboutus from './Aboutus';
+import Footer from '../../components/Footer';
 function MainPage() {
   return (
     <>
@@ -20,6 +21,9 @@ function MainPage() {
     <Container sx={{textAlign:"center", mt:5, mb:5}} maxWidth={false} disableGutters >
       <Aboutus></Aboutus>
     </Container>
+    
+      <Footer></Footer>
+    
     </>
   )
 }
