@@ -8,8 +8,8 @@ import deleteProduct from "../../controllers/admin/deleteProduct.js";
 
 const router = express.Router();
 ('images',5);
-router.get("/products",readProduct);
-router.post("/products",upload,createProduct);
-router.patch("/products/:id",upload,updateProductAndImages);
-router.delete("/products/:id",deleteProduct)
+router.get("/",readProduct);
+router.post("/",upload,createProduct);
+router.patch("/:id",upload,updateProductAndImages);
+router.delete("/:id",deleteProduct)
 export default router;

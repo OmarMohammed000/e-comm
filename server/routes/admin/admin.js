@@ -8,12 +8,12 @@ import product from "./product.js"
 import tag from "./tag.js";
 
 const router = express.Router();
-router.use("/admin",authorizeToken,subcategory)
-router.use("/admin",authorizeToken,dashboard);
-router.use("/admin",authorizeToken,category);
-router.use("/admin",authorizeToken,users);
-router.use("/admin",authorizeToken,product);
-router.use("/admin",authorizeToken,tag)
+router.use("/admin/subcategories", authorizeToken, subcategory);
+router.use("/admin/dashboard", authorizeToken, dashboard);
+router.use("/admin/categories", authorizeToken, category);
+router.use("/admin/users", authorizeToken, users);
+router.use("/admin/products", authorizeToken, product);
+router.use("/admin",tag)
 
 router.post("/admin",authorizeToken,(req,res)=>{
     const user=req.user;

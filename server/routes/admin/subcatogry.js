@@ -8,12 +8,12 @@ import removeProductFromSubcategory from "../../controllers/admin/deleteSubcateg
 
 const router = express.Router();
 // assign subcategories to products and removing 
-router.post("/subcategories/assignToProduct",addProductToSubcategory);
-router.delete("/subcategories/deleteFromProduct",removeProductFromSubcategory)
+router.post("/assignToProduct",addProductToSubcategory);
+router.delete("/deleteFromProduct",removeProductFromSubcategory)
 // doing crud on subcategoreies;
-router.get("/subcategories",readSubcategory)
-router.post("/subcategories",createSubcategory)
-router.patch("/subcategories/:id",updateSubcategory)
-router.delete("/subcategories/:id",deleteSubcategory);
+router.get("/",readSubcategory)
+router.post("/",createSubcategory)
+router.patch("/:id",updateSubcategory)
+router.delete("/:id",deleteSubcategory);
 
 export default router;

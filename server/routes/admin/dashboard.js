@@ -5,6 +5,6 @@ import express from "express";
 const router = express.Router();
 // Dashboard route with token authorization middleware
 
-router.get("/dashboard",dashboardNums);
+router.get("/",dashboardNums);
 
 export default router;
