@@ -7,6 +7,7 @@ import ProductCard from "./components/ProductCard";
 import SearchResult from "./pages/SearchResult";
 import { ThemeProvider } from "@mui/material";
 import theme from "./data/Theme";
+import Collection from "./pages/collections/Collection";
 
 const router=createBrowserRouter([{
   path:'/',
@@ -17,7 +18,10 @@ const router=createBrowserRouter([{
 },{
   path:`/search`,
   element:<SearchResult></SearchResult>
-}
+},{
+  path:`collection/:subOrcategoryName`,
+  element:<Collection></Collection>
+},
 ])
 function App() {
   return (

@@ -5,7 +5,7 @@ import axios from "axios";
 import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
-import { Container, Divider, Grid, Grid2, Typography } from "@mui/material";
+import { Container, Divider, Grid2, Typography } from "@mui/material";
 function SearchResult() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
