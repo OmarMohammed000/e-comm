@@ -1,7 +1,7 @@
 import db from "../../models/index.js";
 async function getProductsBySubcategory (req, res)  {
     const  subcategoryId = parseInt(req.params.subcategoryId);
-    console.log(subcategoryId);
+    
     if(isNaN(subcategoryId)){
       return  res.status(403).json({message:"Enter a Vaild ID"})
     }
