@@ -85,24 +85,26 @@ function NavItems() {
               onClose={handleMenuClose}
               sx={{ display: { xs: "block" } }}
             >
-              <MenuItem onClick={()=>{
-                 navigate(`/collection/${category.name}`,{
-                  state:{
-                    categoryId:category.id
-                  }
-                 });
-              }}>All Clothing</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate(`/collection/${category.name}`, {
+                    state: {
+                      categoryId: category.id,
+                    },
+                  });
+                }}
+              >
+                All Clothing
+              </MenuItem>
               {category.Subcategories.map((subcategory, index) => (
-                
                 <MenuItem
-                 
                   onClick={() => {
                     navigate(`/collection/${subcategory.name}`, {
                       state: {
                         nameOfSub: subcategory.name,
-                        category:category.name,
+                        category: category.name,
                         subId: subcategory.id,
-                        categoryId:category.id
+                        categoryId: category.id,
                       },
                     });
                   }}

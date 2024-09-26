@@ -53,6 +53,7 @@ function SearchResult() {
                 {" "}
                 {/* xs, sm, md, lg control the number of columns */}
                 <ProductCard
+                  id={item.id}
                   price={item.price}
                   title={item.title}
                   imgs={item.Images}

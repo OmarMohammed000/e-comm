@@ -121,7 +121,7 @@ function ProductByTag(props) {
             ) : (
               
               productData.map((product) => (
-                <ProductCard productId={product.id} title={product.title} price={product.price} imgs={product.Images} key={product.id}  ></ProductCard>
+                <ProductCard id={product.id} title={product.title} price={product.price} imgs={product.Images} key={product.id}  ></ProductCard>
               ))
              
             )}

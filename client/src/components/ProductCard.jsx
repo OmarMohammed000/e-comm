@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard(props) {
+  const navigate=useNavigate();
   // State to track the current image
   const [currentImage, setCurrentImage] = useState(
     props.imgs[1].image_location
@@ -43,6 +45,9 @@ function ProductCard(props) {
         <CardActionArea
           onMouseEnter={handleMouseEnter} // Change image on hover
           onMouseLeave={handleMouseLeave} // Revert image when hover ends
+          onClick={()=>{
+            navigate(`/products/${props.title}/${props.id}`)
+          }}
         >
           <CardMedia
             component="img"
@@ -61,13 +66,12 @@ function ProductCard(props) {
               {props.title}
             </Typography>
           </CardContent>
-          
         </CardActionArea>
         <CardActions>
-            <Typography color="error" variant="h6">
-              LE{props.price}
-            </Typography>
-          </CardActions>
+          <Typography color="error" variant="h6">
+            LE{props.price}
+          </Typography>
+        </CardActions>
       </Card>
     </>
   );

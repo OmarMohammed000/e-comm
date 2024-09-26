@@ -72,7 +72,7 @@ function Collection() {
   // Pagination states
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Display 5 products per page
+  const itemsPerPage = 4; // Display 5 products per page
 
   useEffect(() => {
     if (!state) {
@@ -145,7 +145,7 @@ function Collection() {
     <Typography variant="h4" textAlign="center" mt={2}>
       {subOrcategoryName}
     </Typography>
-    <hr />
+    <Divider sx={{borderColor:"grey"}}></Divider>
 
     {/* Conditional Rendering for Loading State */}
     {loading ? (
@@ -173,10 +173,11 @@ function Collection() {
           {/* Product Grid */}
           <Box sx={{ flexGrow: 1 }}>
             <Grid2 container spacing={3}>
-              {currentProducts .length > 0 ? (
-                currentProducts .map((item, index) => (
+              {currentProducts.length > 0 ? (
+                currentProducts.map((item, index) => (
                   <Grid2 item xs={12} sm={6} md={4} lg={3} key={index}>
                     <ProductCard
+                      id={item.id}
                       price={item.price}
                       title={item.title}
                       imgs={item.Images}
