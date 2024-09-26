@@ -86,14 +86,7 @@ function Login(props) {
         email: data.get("email"),
         password: data.get("password"),
       };
-      try {
-        const userReq = await login(formData);
-        // On successful login, redirect and assign the user
-        
-        navigate('/'); // Navigate to dashboard
-      } catch (error) {
-        setErrorMessage('Login failed. Please check your credentials.');
-      }
+     
       if (register) {
         formData.username = data.get("username");
         formData.phone = data.get("phone");
@@ -103,8 +96,14 @@ function Login(props) {
           const response = await axios.post("/register", formData);
 
           if (response.status === 201) {
-            console.log(response.data.message);
-            setFormSubmitted(true); // Indicate form submission success
+            try {
+              const user = await login(formData);
+              // On successful register, redirect and assign the user
+              
+              navigate('/'); 
+            } catch (error) {
+              setErrorMessage('Login failed. Please check your credentials.');
+            }
           }
         } catch (error) {
           // Handle errors (like email already registered or server issues)
@@ -118,6 +117,14 @@ function Login(props) {
         }
         
         console.log(formData);
+      }
+      try {
+        const userReq = await login(formData);
+        // On successful login, redirect and assign the user
+        
+        navigate('/'); // Navigate to dashboard
+      } catch (error) {
+        setErrorMessage('Login failed. Please check your credentials.');
       }
     }
   };

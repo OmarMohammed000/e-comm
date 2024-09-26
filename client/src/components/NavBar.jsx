@@ -14,10 +14,11 @@ import theme from "../data/Theme";
 import NavItems from "./NavItems";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function NavBar() {
   const navigate = useNavigate();
-  
+  const { user } = useAuth();
   
 
   
@@ -43,7 +44,9 @@ function NavBar() {
           </NavItems>
           <Search></Search>
           <Button color="secondry" size="medium"><ShoppingCartIcon></ShoppingCartIcon></Button>
-          <Button color="error" variant="outlined" size="medium">Login</Button>
+          {user?(<div>{user.email}</div>):<Button color="error" variant="outlined" size="medium" onClick={()=>{
+            navigate("/login")
+          }}>Login</Button>}
         </Toolbar>
       </AppBar>
      
