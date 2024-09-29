@@ -22,7 +22,7 @@ const HeroSection= () => {
             },
             [theme.breakpoints.down('xs')]: {
               height: '700px', // Even taller on very small screens
-            },
+            },height:700, objectFit:"cover"
           }}  >
 
        </Box>
@@ -40,7 +40,7 @@ const HeroSection= () => {
             },
             [theme.breakpoints.down('xs')]: {
               height: '700px', // Even taller on very small screens
-            },  
+            },height:700, objectFit:"cover"
           }}   >
       </Box>
         <Carousel.Caption>

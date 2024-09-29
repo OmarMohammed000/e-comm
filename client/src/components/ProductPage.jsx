@@ -15,13 +15,15 @@ import {
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../context/cartSlice';
 
 function ProductPage() {
   const { productId } = useParams();
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -47,9 +49,9 @@ function ProductPage() {
   }, [productData]);
 
   const handleAddToCart = () => {
-    // Handle Add to Cart functionality
-    console.log(`Added ${quantity} ${productData?.title} to cart.`);
+    dispatch(addItemToCart({ productId, quantity }));
   };
+
   if(error){
     console.log(error)
     return <div>error</div>
