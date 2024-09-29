@@ -1,12 +1,12 @@
-import express from "express"
+import express from "express";
 import session from "express-session";
 import passport from "passport";
-import cors from "cors"
+import cors from "cors";
 import db from "./models/index.js";
-import initialize  from "./utils/passport-config.js";
+import initialize from "./utils/passport-config.js";
 import env from "dotenv";
-import loginRoute from "./routes/loginRoute.js"
-import registerRoute  from "./routes/registerRoute.js"
+import loginRoute from "./routes/loginRoute.js";
+import registerRoute from "./routes/registerRoute.js";
 import logout from "./routes/logoutRoute.js";
 import refreshToken from "./routes/refreshTokenRoute.js";
 import admin from "./routes/admin/admin.js";
@@ -16,38 +16,47 @@ import order from "./routes/order.js";
 import cart from "./routes/cart.js";
 import products from "./routes/product.js";
 
-const app=express();
+const app = express();
 initialize(passport);
 env.config();
 // Setup middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 }
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", 
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000", // Frontend URL
+  credentials: true, // Allow credentials (i.e., cookies) to be sent
+}));
 
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({extended:true}));
-
-app.use("/",registerRoute);
-app.use("/",loginRoute);
-app.use("/",logout);
-app.use("/",refreshToken);
-app.use("/",admin);
-app.use("/",home);
-app.use("/",cart);
-app.use("/",order);
-app.use("/",products)
+app.use("/", registerRoute);
+app.use("/", loginRoute);
+app.use("/", logout);
+app.use("/", refreshToken);
+app.use("/", admin);
+app.use("/", home);
+app.use("/", cart);
+app.use("/", order);
+app.use("/", products);
 
 db.sequelize.sync().then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}` );
-    });
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
   });
+});

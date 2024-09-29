@@ -10,7 +10,7 @@ async function deleteItem(req, res)  {
         if (!cart) {
             return res.status(404).json({ message: "Cart not found" });
         }
-
+        console.log(productId)
         // Find and delete the cart item
         const cartItem = await db.CartItem.findOne({
             where: { cart_id: cart.id, product_id: productId },

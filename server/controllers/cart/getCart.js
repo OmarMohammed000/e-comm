@@ -10,7 +10,17 @@ async function getCart(req, res) {
       include: [
         {
           model: db.CartItem,
-          include: [db.Product], // Include product details
+          include: [
+            {
+              model: db.Product,
+              include: [
+                {
+                  model: db.Image, 
+                  attributes: ['id', 'image_location'], 
+                },
+              ],
+            },
+          ],
         },
       ],
     });
