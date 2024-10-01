@@ -1,11 +1,13 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
+import { Box, Button, Container, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import AdminSideBar from "./AdminSideBar";
 import axios from "axios";
 import apiLink from "../../data/ApiLink";
+import { useNavigate } from "react-router-dom";
 function Admin() {
   const { user } = useAuth();
+  const navigate=useNavigate()
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dashboard, setDashboard] = useState(null);
@@ -73,6 +75,13 @@ function Admin() {
             </Typography>
           </Container>
         )}
+        <Box sx={{display:"flex",justifyContent:"center",alignItems:"center" ,mt:4,p:2}}>
+        <Button textAlign="center" size="large" variant="contained" onClick={()=>{
+          navigate("/")
+        }}>
+          Return Home 
+        </Button>
+        </Box>
       </Grid2>
     </Grid2>
   );

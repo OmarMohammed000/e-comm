@@ -99,11 +99,12 @@ function AdminProduct() {
   };
 // start of the edit logic
   const navigate =useNavigate()
-  const handleEdit=(id,title,description,imageArray)=>{
-    navigate('/admin/products/productCreation',{state:{
+  const handleEdit=(id,title,description,price,imageArray)=>{
+    navigate('/admin/products/EditProduct',{state:{
       id,
       title,
       description,
+      price,
       imageArray,
     }})
   }
@@ -193,7 +194,7 @@ function AdminProduct() {
                         color="primary"
                         sx={{width:75}}
                         onClick={()=>{
-                          handleEdit(row.id,row.title,row.description,row.Images)
+                          handleEdit(row.id,row.title,row.description,row.price,row.Images)
                         }}
                       >
                         Edit

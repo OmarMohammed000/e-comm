@@ -12,7 +12,6 @@ function CreateProduct() {
   const [tagError, setTagError] = useState(null);
   const [imagesError, setImagesError] = useState(null);
   const [success, setSuccessMessage] = useState(null);
-  const [productCreation, setProductCreation] = useState(null);
 
   const [subcategories, setSubcategories] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
@@ -30,7 +29,7 @@ function CreateProduct() {
     setSubcategoryError(null);
     setTagError(null);
     setImagesError(null);
-  
+
     try {
       // Product creation
       const formData = new FormData();
@@ -43,25 +42,17 @@ function CreateProduct() {
       images.forEach((image) => {
         formData.append("images", image);
       });
-  
-      const response = await axios.post(
-        `${apiLink}/admin/products`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      );
-      
-      // Log and update product creation
-      console.log(response.data);
-      setProductCreation(response.data);
+
+      const response = await axios.post(`${apiLink}/admin/products`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+
       const productId = response.data.product.id;
       setSuccessMessage("Product added successfully");
-  
-      // Assign product to subcategory
+
       if (subcategory) {
         try {
           await axios.post(
@@ -76,14 +67,16 @@ function CreateProduct() {
               },
             }
           );
-          setSuccessMessage((prev) => `${prev} Product assigned to subcategory.`);
+          setSuccessMessage(
+            (prev) => `${prev} Product assigned to subcategory.`
+          );
         } catch (error) {
           setSubcategoryError(
             "Error assigning product to subcategory: " + error.message
           );
         }
       }
-  
+
       // Assign tags to product
       if (tags.length > 0) {
         try {
@@ -106,7 +99,6 @@ function CreateProduct() {
           setTagError("Error assigning tags to product: " + error.message);
         }
       }
-      
     } catch (error) {
       setError("Error in product creation: " + error.message);
     }

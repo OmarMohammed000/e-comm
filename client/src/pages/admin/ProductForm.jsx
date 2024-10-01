@@ -38,9 +38,10 @@ const ProductForm = ({
   imagesError,
   setImagesError,
   error,
-  setSubcategories, // <-- Add this as a prop
-  setAvailableTags, // <-- Add this as a prop
-  setError, // <-- Add this as a prop
+  setSubcategories, 
+  setAvailableTags,
+  setError, 
+  imgChangeWarning,
 }) => {
   const [titleCharCount, setTitleCharCount] = useState(title.length);
 
@@ -199,6 +200,7 @@ const ProductForm = ({
               />
             </Button>
             <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap" }}>
+              {imgChangeWarning&& <Alert severity="warning">{imgChangeWarning}</Alert>}
               {images.map((image, index) => (
                 <Box key={index} sx={{ position: "relative", mr: 1, mb: 1 }}>
                   <img
