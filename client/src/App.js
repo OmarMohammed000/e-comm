@@ -25,6 +25,8 @@ import CreateProduct from "./pages/admin/CreateProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import Users from "./pages/admin/Users";
 import Tags from "./pages/admin/Tags";
+import Subcategory from "./pages/admin/Subcategory";
+import Categories from "./pages/admin/Categories";
 
 
 const router=createBrowserRouter([{
@@ -76,6 +78,12 @@ const router=createBrowserRouter([{
 },{
   path:"admin/tags",
   element:<ProtectedAdminRoute><Tags></Tags></ProtectedAdminRoute>
+},{
+  path:"admin/subcategories",
+  element:<ProtectedAdminRoute><Subcategory></Subcategory></ProtectedAdminRoute>
+},{
+  path:"admin/categories",
+  element:<ProtectedAdminRoute><Categories></Categories></ProtectedAdminRoute>
 }
 ])
 function App() {

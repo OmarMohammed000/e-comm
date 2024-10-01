@@ -135,7 +135,7 @@ function Tags() {
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) throw new Error("No access token found");
-      const response = await axios.post(
+        await axios.post(
         "/admin/tags",
         { tag_name: newTagName },
         {
