@@ -1,6 +1,7 @@
 import db from "../../models/index.js";
 async function addProductToSubcategory(req, res)  {
     const { productId, subcategoryId } = req.body;
+    
   
     try {
       // Check if the product exists
