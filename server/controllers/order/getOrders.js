@@ -11,10 +11,10 @@ async function getOrders(req, res) {
           include: [
             {
               model: db.Product,
-              attributes: ["id", "title", "price"], // Include specific product details
+              attributes: ["id", "title"], // Include specific product details
             },
           ],
-          attributes: ["id", "product_id"], // Include specific order item details
+          attributes: ["id", "product_id","quantity"], // Include specific order item details
         },
       ],
       attributes: ["id", "time_of_order", "to_address", "to_city"], // Include specific order details

@@ -22,6 +22,10 @@ const OrderItem = (sequelize) => {
           model: "products",
           key: "id",
         },
+      },quantity: {
+        type: DataTypes.INTEGER, 
+        allowNull: false,
+        defaultValue: 1,
       },
     },
     {

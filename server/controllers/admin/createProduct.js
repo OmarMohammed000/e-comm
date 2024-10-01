@@ -9,7 +9,7 @@ async function createProduct(req, res) {
     // Create the product
     const product = await db.Product.create({
       title,
-      description,
+      description,  
       price,
     });
 
