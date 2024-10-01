@@ -23,6 +23,7 @@ import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import AdminProduct from "./pages/admin/AdminProduct";
 import CreateProduct from "./pages/admin/CreateProduct";
 import EditProduct from "./pages/admin/EditProduct";
+import Users from "./pages/admin/Users";
 
 
 const router=createBrowserRouter([{
@@ -68,8 +69,10 @@ const router=createBrowserRouter([{
 },{
   path:"admin/products/EditProduct",
   element:<ProtectedAdminRoute><EditProduct></EditProduct></ProtectedAdminRoute>
+},{
+  path:"admin/users",
+  element:<ProtectedAdminRoute><Users></Users></ProtectedAdminRoute>
 }
-
 ])
 function App() {
   return (
