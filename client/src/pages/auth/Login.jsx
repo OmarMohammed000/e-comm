@@ -13,7 +13,8 @@ import { styled } from "@mui/material/styles";
 import { ThemeProvider, createTheme } from "@mui/material/styles"; // Material UI Theme Provider
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -66,6 +67,7 @@ function Login(props) {
   const { register } = props; // Get the register prop to differentiate between login and registration
   const {login} =useAuth();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [emailError, setEmailError] =useState(false);
   const [emailErrorMessage, setEmailErrorMessage] =useState("");
   const [passwordError, setPasswordError] =useState(false);
@@ -74,7 +76,7 @@ function Login(props) {
   const [usernameErrorMessage, setUsernameErrorMessage] =useState("");
   const [formSubmitted, setFormSubmitted] =useState(false);
   const [errorMessage, setErrorMessage] =useState('');
-
+  const aleart='You need to login first before adding items to cart';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -174,6 +176,7 @@ function Login(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
+      {state &&<Alert severity="warning">{aleart}</Alert>}
       <SignInContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
           <Typography

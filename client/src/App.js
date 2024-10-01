@@ -18,6 +18,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Provider } from "react-redux";
 import store from "./context/store";
 import OrderSuccessful from "./pages/OrderSuccessful";
+import Admin from "./pages/admin/Admin";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import AdminProduct from "./pages/admin/AdminProduct";
+import CreateProduct from "./pages/admin/CreateProduct";
 
 
 const router=createBrowserRouter([{
@@ -32,7 +36,8 @@ const router=createBrowserRouter([{
 },{
   path:`products/:proudctname/:productId`,
   element:<ProductPage></ProductPage>
-},{
+},
+{
   path:"/login",
   element:<Login></Login>
 },{
@@ -49,8 +54,18 @@ const router=createBrowserRouter([{
   element:<ProtectedRoute><Cart></Cart></ProtectedRoute>
 },{
   path:"/order/successful",
-  element:<OrderSuccessful></OrderSuccessful>
+  element:<ProtectedRoute><OrderSuccessful></OrderSuccessful></ProtectedRoute>
+},{
+  path:"/admin",
+  element:<ProtectedAdminRoute><Admin></Admin></ProtectedAdminRoute>
+},{
+  path:"/admin/products",
+  element:<ProtectedAdminRoute><AdminProduct></AdminProduct></ProtectedAdminRoute>
+},{
+  path:"admin/products/productCreation",
+  element:<ProtectedAdminRoute><CreateProduct></CreateProduct></ProtectedAdminRoute>
 }
+
 ])
 function App() {
   return (

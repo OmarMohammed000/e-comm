@@ -10,10 +10,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ProductCard(props) {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   // State to track the current image
   const [currentImage, setCurrentImage] = useState(
-    props.imgs[1].image_location
+    props.imgs[1]?.image_location || ""
   );
   useEffect(() => {
     if (props.imgs[1]) {
@@ -23,13 +23,20 @@ function ProductCard(props) {
   // Handlers to change the image on hover
   const handleMouseEnter = () => {
     if (props.imgs[0]) {
-      // Only change if a second image exists
       setCurrentImage(props.imgs[0].image_location);
+    }else{
+      setCurrentImage('')
     }
   };
 
   const handleMouseLeave = () => {
-    setCurrentImage(props.imgs[1].image_location); // Revert to the original image
+    if(props.imgs[1]){
+      setCurrentImage(props.imgs[1].image_location); 
+    }else if(props.imgs[0]){
+      setCurrentImage(props.imgs[0].image_location);
+    }else{
+      setCurrentImage('')
+    }
   };
 
   return (
@@ -45,8 +52,8 @@ function ProductCard(props) {
         <CardActionArea
           onMouseEnter={handleMouseEnter} // Change image on hover
           onMouseLeave={handleMouseLeave} // Revert image when hover ends
-          onClick={()=>{
-            navigate(`/products/${props.title}/${props.id}`)
+          onClick={() => {
+            navigate(`/products/${props.title}/${props.id}`);
           }}
         >
           <CardMedia

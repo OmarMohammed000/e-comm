@@ -17,6 +17,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../context/cartSlice';
+import { useAuth } from "../context/AuthContext";
 
 function ProductPage() {
   const { productId } = useParams();
@@ -24,6 +25,8 @@ function ProductPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const {user}=useAuth();
+  const navigate=useNavigate()
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -49,7 +52,13 @@ function ProductPage() {
   }, [productData]);
 
   const handleAddToCart = () => {
+    if(user){
     dispatch(addItemToCart({ productId, quantity }));
+    }else if(!user){
+      navigate("/login",{state:{
+        error
+      }})  
+    }
   };
 
   if(error){

@@ -62,6 +62,7 @@ export const updateItemQuantity = createAsyncThunk(
       });
 
       // Return the updated cart item from the backend
+       
       return response.data; // response.data should contain the updated cartItem
     } catch (error) {
       return rejectWithValue(error.response.data);
