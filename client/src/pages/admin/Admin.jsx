@@ -23,10 +23,10 @@ function Admin() {
           }
         });
         setDashboard(response.data);
-        console.log(response.data)
+       
       } catch (error) {
-        console.log(error.data);
-        setError("Error fetiching dashboard" + error);
+        
+        setError("Error fetiching dashboard" + error.message);
       } finally {
         setLoading(false);
       }

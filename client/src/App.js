@@ -24,6 +24,7 @@ import AdminProduct from "./pages/admin/AdminProduct";
 import CreateProduct from "./pages/admin/CreateProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import Users from "./pages/admin/Users";
+import Tags from "./pages/admin/Tags";
 
 
 const router=createBrowserRouter([{
@@ -72,6 +73,9 @@ const router=createBrowserRouter([{
 },{
   path:"admin/users",
   element:<ProtectedAdminRoute><Users></Users></ProtectedAdminRoute>
+},{
+  path:"admin/tags",
+  element:<ProtectedAdminRoute><Tags></Tags></ProtectedAdminRoute>
 }
 ])
 function App() {
