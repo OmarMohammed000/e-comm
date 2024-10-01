@@ -1,10 +1,12 @@
 import db from "../../models/index.js";
 
 async function createSubcategory(req,res) {
-    const {name,categoryId}=req.body;
+    const name=req.body.name;
+    const categoryId=req.body.category_id;
+    
     try {
         if(!name || !categoryId){
-            res.status(400).json({message:"Name and category ID is required"});
+          return  res.status(400).json({message:"Name and category ID is required"});
         }
         const subcategory= await db.Subcategory.create({
             name:name,
