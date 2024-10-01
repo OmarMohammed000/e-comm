@@ -59,14 +59,14 @@ function AdminSideBar() {
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton sx={{":hover":{bgcolor:"grey"}}} onClick={()=>{
-              navigate("/admin/subcategory")
+              navigate("/admin/subcategories")
             }}>
               <ListItemText primaryTypographyProps={textStyles}primary={"Subcategory"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton sx={{":hover":{bgcolor:"grey"}}} onClick={()=>{
-              navigate("/admin/category")
+              navigate("/admin/categories")
             }}> 
               <ListItemText primaryTypographyProps={textStyles} primary={"Category"} />
             </ListItemButton>
