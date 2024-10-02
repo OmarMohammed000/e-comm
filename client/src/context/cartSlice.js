@@ -30,7 +30,8 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (_, { rejectWi
     });
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    console.error('Error fetching cart:', error.response);
+    return rejectWithValue(error.response ? error.response.data : error.message);
   }
 });
 
