@@ -67,7 +67,7 @@
 
     const login = async (formData) => {
       try {
-        const response = await axios.post('/login', formData);
+        const response = await axios.post(`${apiLink}/login`, formData);
         const { accessToken, refreshToken, user } = response.data;
 
         localStorage.setItem('accessToken', accessToken);
