@@ -10,7 +10,7 @@ async function createOrder(req, res) {
     }
 
     try {
-        // Create the order
+       
         const order = await db.Order.create({
             user_id: userId,
             time_of_order: new Date(),
@@ -18,12 +18,11 @@ async function createOrder(req, res) {
             to_city: to_city,
         });
 
-        // Create the order items
+       
         const orderItems = items.map(item => ({
             order_id: order.id,
             product_id: item.product_id,
             quantity: item.quantity,
-            // Add other fields like price_at_purchase if needed
         }));
 
         await db.OrderItem.bulkCreate(orderItems);

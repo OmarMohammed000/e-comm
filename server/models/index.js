@@ -2,7 +2,6 @@ import { Sequelize } from "sequelize";
 import config from "../utils/config.js";
 // importing the models
 import User from "./UserModel.js";
-// import Admin from "./AdminModel.js";
 import Product from "./ProductModel.js";
 import Category from "./CategoriesModel.js";
 import Subcategory from "./SubcategoryModel.js";
@@ -34,7 +33,6 @@ db.sequelize = sequelize;
 
 // Init the models
 db.User = User(sequelize, Sequelize);
-// db.Admin = Admin(sequelize, Sequelize);
 db.Product = Product(sequelize, Sequelize);
 db.Category = Category(sequelize, Sequelize);
 db.Subcategory = Subcategory(sequelize, Sequelize);
@@ -47,10 +45,6 @@ db.Tag = Tag(sequelize, Sequelize);
 db.ProductTag = ProductTag(sequelize, Sequelize);
 db.Image=Image(sequelize,Sequelize);
 
-// defining relations
-
-// db.User.hasMany(db.Admin, { foreignKey: "id" });
-// db.Admin.belongsTo(db.User, { foreignKey: "id" });
 
 db.Category.hasMany(db.Subcategory, { foreignKey: 'category_id' });
 db.Subcategory.belongsTo(db.Category, { foreignKey: 'category_id' });

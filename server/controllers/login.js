@@ -11,7 +11,6 @@ function loginApp(req, res, next) {
       return next(err); // Pass any errors to Express
     }
     if (!user) {
-      // If authentication fails, send a 401 Unauthorized response
       return res.status(401).json({ message: info.message || "Login failed" });
     }
 

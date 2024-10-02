@@ -1,10 +1,13 @@
 import db from "../../models/index.js";
 async function addProductToSubcategory(req, res)  {
-    const { productId, subcategoryId } = req.body;
-    
+  const productId=parseInt(req.body.productId);
+  const subcategoryId=parseInt(req.body.subcategoryId);
+    if(isNaN(productId)|| isNaN(subcategoryId)){
+      return res.status(400).json({message:"Invalid subcategoryId Or productID"});
+  }
   
     try {
-      // Check if the product exists
+      
       const product = await db.Product.findByPk(productId);
       if (!product) {
         return res.status(404).json({ message: "Product not found" });

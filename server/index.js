@@ -19,7 +19,7 @@ import products from "./routes/product.js";
 const app = express();
 initialize(passport);
 env.config();
-// Setup middleware
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -39,8 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:3000", // Frontend URL
-  credentials: true, // Allow credentials (i.e., cookies) to be sent
+  origin: "http://localhost:3000", 
+  credentials: true, 
 }));
 
 app.use(express.urlencoded({ extended: true }));

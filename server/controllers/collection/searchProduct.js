@@ -15,20 +15,20 @@ async function searchProduct(req,res) {
                 [Op.or]: [ 
                     {
                         title: {
-                            [Op.like]: `%${product}%`, // Case-insensitive search in title
+                            [Op.like]: `%${product}%`, 
                         },
                     },
                     {
                         description: {
-                            [Op.like]: `%${product}%`, // Case-insensitive search in description
+                            [Op.like]: `%${product}%`,
                         },
                     },
                 ],
             },
             attributes: ['id', 'title', 'description', 'price'], 
             include: {
-                model: db.Image, // Include images
-                attributes: ['image_location'], // Select the image_location field from the Image model
+                model: db.Image, 
+                attributes: ['image_location'], 
               },
         });
 

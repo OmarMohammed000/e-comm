@@ -15,12 +15,12 @@ async function getProductByTag(req, res) {
           model: db.Tag,
           through: { attributes: [] },
           where: {
-            tag_name: tags, // Filter by the provided tag name
+            tag_name: tags,
           },
-          attributes: [], // No need to return tag data
+          attributes: [], 
         },
         {
-          model: db.Image, // Include images for each product
+          model: db.Image, 
           attributes: ['image_location'],
         },
       ],

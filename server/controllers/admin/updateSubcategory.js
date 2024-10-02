@@ -8,17 +8,17 @@ async function updateSubcategory(req,res) {
     }
     try {
         const subcategory =await db.Subcategory.findByPk(id);
-        // If the category is not found, send a 404 response
+        
         if (!subcategory) {
            return res.status(404).json({ message: 'Category not found' });
        }
         if (name !== undefined) subcategory.name = name;
         if (categoryId !== undefined) subcategory.category_id = categoryId;
 
-        // Save the changes to the database
+      
         await subcategory.save();
 
-        // Send a success response with the updated category
+      
        res.status(201).json({ message: 'Subcategory updated successfully', subcategory });
     } catch (error) {
         console.error('Error updating category:', error);

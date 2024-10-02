@@ -5,11 +5,11 @@ async function deleteFromOrder(req, res) {
   const { orderId, productId } = req.params;
 
   try {
-    // Find the order and ensure it belongs to the logged-in user
+   
     const order = await db.Order.findOne({
       where: {
         id: orderId,
-        user_id: req.user.id, // Ensure the order belongs to the logged-in user
+        user_id: req.user.id,
       },
     });
 
@@ -20,10 +20,10 @@ async function deleteFromOrder(req, res) {
       });
     }
 
-    // Check if the order is within the 30-minute modification window
+    
     const currentTime = new Date();
     const orderTime = new Date(order.time_of_order);
-    const timeDifference = (currentTime - orderTime) / (1000 * 60); // Time difference in minutes
+    const timeDifference = (currentTime - orderTime) / (1000 * 60); 
 
     if (timeDifference > 30) {
       return res.status(403).json({
@@ -32,7 +32,7 @@ async function deleteFromOrder(req, res) {
       });
     }
 
-    // Add the product to the order
+   
     const orderItem = await db.OrderItem.destroy({
       where: {
         order_id: orderId,

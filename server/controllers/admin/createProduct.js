@@ -2,10 +2,10 @@ import db from "../../models/index.js";
 import cloudinary from "../../utils/cloudinary-config.js";
 async function createProduct(req, res) {
   try {
-    // this part must be changed after devolping frontend it only made like this for post man
+    
     const jsonData = JSON.parse(req.body.data);
     const { title, description, price } = jsonData;
-    // end
+  
     // Create the product
     const product = await db.Product.create({
       title,

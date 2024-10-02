@@ -9,13 +9,13 @@ async function getProductsBySubcategory (req, res)  {
       const subcategory = await db.Subcategory.findByPk(subcategoryId, {
         include: {
           model: db.Product,
-          attributes: ['id', 'title', 'price'], // Select specific fields from Product
+          attributes: ['id', 'title', 'price'], 
           include: {
-            model: db.Image, // Include images for each product
-            attributes: ['image_location'], // Select specific fields from Image
+            model: db.Image,
+            attributes: ['image_location'], 
           },
         },
-        attributes: ['id', 'name'], // Select specific fields from Subcategory
+        attributes: ['id', 'name'], 
       });
   
       if (!subcategory) {

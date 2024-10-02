@@ -11,14 +11,14 @@ async function getOrders(req, res) {
           include: [
             {
               model: db.Product,
-              attributes: ["id", "title"], // Include specific product details
+              attributes: ["id", "title"], 
             },
           ],
-          attributes: ["id", "product_id","quantity"], // Include specific order item details
+          attributes: ["id", "product_id","quantity"], 
         },
       ],
-      attributes: ["id", "time_of_order", "to_address", "to_city"], // Include specific order details
-      order: [["time_of_order", "DESC"]], // Order by time_of_order, most recent first
+      attributes: ["id", "time_of_order", "to_address", "to_city"], 
+      order: [["time_of_order", "DESC"]], 
     });
 
     if (!orders || orders.length === 0) {

@@ -7,8 +7,8 @@ function initialize(passport) {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: "email", // Field name in the login form
-        passwordField: "password", // Field name in the login form
+        usernameField: "email",
+        passwordField: "password", 
       },
       async (email, password, done) => {
         try {
@@ -22,14 +22,14 @@ function initialize(passport) {
           // Compare the input password with the stored hashed password
           const isMatch = await bcrypt.compare(password, user.password);
           if (isMatch) {
-            // Passwords match, return the user
+            
             return done(null, user);
           } else {
-            // Passwords do not match
+            
             return done(null, false, { message: "Password incorrect" });
           }
         } catch (error) {
-          // Handle any errors that occurred during the process
+         
           return done(error);
         }
       }
@@ -41,7 +41,7 @@ function initialize(passport) {
     done(null, user.id);
   });
 
-  // Deserialize user information from the session
+  
   passport.deserializeUser(async (id, done) => {
     try {
       const user = await db.User.findByPk(id);

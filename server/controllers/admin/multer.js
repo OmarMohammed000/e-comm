@@ -12,6 +12,5 @@ const storage = multer.diskStorage({
     },
   });
 
-const upload = multer({ storage }).array('images', 5); // 'images' is the field name and 5 is the max number of files
-
+const upload = multer({ storage }).array('images', 5); 
 export default upload;

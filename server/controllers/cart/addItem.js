@@ -50,15 +50,15 @@ async function addItem(req, res) {
           model: db.Product,
           include: [
             {
-              model: db.Image, // Include the Image model to fetch product images
-              attributes: ['id', 'image_location'], // Only include necessary fields
+              model: db.Image, 
+              attributes: ['id', 'image_location'], 
             },
           ],
         },
       ],
     });
 
-    res.status(200).json(updatedCartItem); // Return the updated cart item with product details and images
+    res.status(200).json(updatedCartItem); 
   } catch (error) {
     console.error("Error adding product to cart:", error);
     res.status(500).json({ message: "An error occurred while adding to cart" });

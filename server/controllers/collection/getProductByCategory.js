@@ -13,9 +13,9 @@ export const getProductsByCategory = async (req, res) => {
           model: db.Product,
           include: {
             model: db.Image,
-            attributes: ['image_location'] // Only return image location
+            attributes: ['image_location'] 
           },
-          attributes: ['id', 'title', 'price'] // Only return product fields
+          attributes: ['id', 'title', 'price']
         }
       }
     });

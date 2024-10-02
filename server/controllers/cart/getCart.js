@@ -37,7 +37,7 @@ async function getCart(req, res) {
 
     res.status(200).json({
       cartItems: cart.CartItems,
-      totalPrice: totalPrice.toFixed(2), // Ensure the price is formatted correctly
+      totalPrice: totalPrice.toFixed(2), 
     });
   } catch (error) {
     console.error("Error fetching cart:", error);

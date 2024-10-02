@@ -18,23 +18,23 @@ async function getProductsBySubcategoryAndTags (req, res) {
       const products = await db.Product.findAll({
         where: {
           [Op.and]: [
-            { '$Subcategories.id$': subcategoryId }, // Filter by subcategory
-            { '$Tags.tag_name$': { [Op.in]: tagList } } // Filter by tag names
+            { '$Subcategories.id$': subcategoryId },
+            { '$Tags.tag_name$': { [Op.in]: tagList } } 
           ],
         },
         include: [
           {
             model: db.Subcategory,
             through: { attributes: [] },
-            attributes: [], // No need to return subcategory data
+            attributes: [], 
           },
           {
             model: db.Tag,
             through: { attributes: [] },
-            attributes: [], // No need to return tag data
+            attributes: [],
           },
           {
-            model: db.Image, // Include images for each product
+            model: db.Image, 
             attributes: ['image_location'],
           },
         ],

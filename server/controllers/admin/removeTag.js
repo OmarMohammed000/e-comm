@@ -4,7 +4,7 @@ async function removeTagsFromProduct(req, res) {
     const { productId, tagIds } = req.body;
 
     try {
-        // Find the product by ID
+        
         const product = await db.Product.findByPk(productId);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
