@@ -108,7 +108,7 @@ function ProductByTag(props) {
     <>
       <Container>
         <Divider>
-          <Typography variant="h3">{props.displayedTag} </Typography>
+          <Typography variant="h3" id={props.displayedTag}>{props.displayedTag} </Typography>
         </Divider>
         <div className="slider-container ">
         <Container sx={{textAlign:"center",mt:3, }}>

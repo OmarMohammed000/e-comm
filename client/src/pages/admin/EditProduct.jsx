@@ -1,4 +1,10 @@
-import { Alert, AlertTitle, Button, Grid2 } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  CircularProgress,
+  Grid2,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 import { useLocation } from "react-router-dom";
@@ -22,6 +28,7 @@ function EditProduct() {
   const [originalTags, setOriginalTags] = useState([]);
   const [images, setImages] = useState([]);
   const [submited, setSubmited] = useState(null);
+  const [loading, setLoading] = useState(false);
   const imgChangeWarning =
     "Any Image Changes will delete the pervious assinged images";
   // getting exiting subcats for product
@@ -44,7 +51,7 @@ function EditProduct() {
     };
 
     getAssignedSubCat();
-  }, [state.id,success]);
+  }, [state.id, success]);
 
   useEffect(() => {
     const fetchProductTags = async () => {
@@ -73,7 +80,7 @@ function EditProduct() {
     };
 
     fetchProductTags();
-  }, [state.id,success]);
+  }, [state.id, success]);
   const haveTagsChanged = () => {
     if (tags.length !== originalTags.length) {
       return true;
@@ -87,6 +94,7 @@ function EditProduct() {
   // submit logic
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setSuccessMessage(null);
     setError(null);
     setSubmited(null);
@@ -128,16 +136,20 @@ function EditProduct() {
 
     if (originalSub !== subcategory) {
       try {
-        await axios.delete(`${apiLink}/admin/subcategories/deleteFromProduct`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          data: {
-            productId: state.id,
-            subcategoryId: originalSub,
-          },
-        });
-
+        if (originalSub) {
+          await axios.delete(
+            `${apiLink}/admin/subcategories/deleteFromProduct`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+              data: {
+                productId: state.id,
+                subcategoryId: originalSub,
+              },
+            }
+          );
+        }
         await axios.post(
           `${apiLink}/admin/subcategories/assignToProduct`,
           {
@@ -206,9 +218,11 @@ function EditProduct() {
     }
     if (currentErrors.length > 0) {
       setError(currentErrors.join(" | "));
-    } if(!error&& !success)  {
+    }
+    if (!error && !success) {
       setSubmited("No Changes occured");
     }
+    setLoading(false);
   };
 
   return (
@@ -256,8 +270,13 @@ function EditProduct() {
           imgChangeWarning={imgChangeWarning}
         ></ProductForm>
         <Grid2 container justifyContent="center" sx={{ mt: 4 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit Product
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={loading}
+            onClick={handleSubmit}
+          >
+            {loading ? <CircularProgress size={24} /> : "Submit Product"}
           </Button>
         </Grid2>
       </Grid2>

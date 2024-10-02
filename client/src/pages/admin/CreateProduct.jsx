@@ -1,6 +1,6 @@
 // CreateProduct.js
 import React, { useState } from "react";
-import { Grid2, Typography, Alert, AlertTitle, Button } from "@mui/material";
+import { Grid2, Typography, Alert, AlertTitle, Button, CircularProgress } from "@mui/material";
 import AdminSideBar from "./AdminSideBar";
 import axios from "axios";
 import apiLink from "../../data/ApiLink";
@@ -12,7 +12,7 @@ function CreateProduct() {
   const [tagError, setTagError] = useState(null);
   const [imagesError, setImagesError] = useState(null);
   const [success, setSuccessMessage] = useState(null);
-
+  const [loading,setLoading]=useState(false);
   const [subcategories, setSubcategories] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
   const [title, setTitle] = useState("");
@@ -24,6 +24,7 @@ function CreateProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     setSuccessMessage(null);
     setError(null);
     setSubcategoryError(null);
@@ -101,6 +102,8 @@ function CreateProduct() {
       }
     } catch (error) {
       setError("Error in product creation: " + error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -163,8 +166,8 @@ function CreateProduct() {
 
         {/* Button for submission */}
         <Grid2 container justifyContent="center" sx={{ mt: 4 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit Product
+          <Button variant="contained" color="primary" onClick={handleSubmit} disabled={loading}>
+            {loading? (<CircularProgress size={24}/> ):("Submit Product")}
           </Button>
         </Grid2>
       </Grid2>

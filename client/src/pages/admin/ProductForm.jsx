@@ -81,7 +81,7 @@ const ProductForm = ({
 
   // Image Validation
   const validateImage = (image) => {
-    const validFormats = ["image/jpeg", "image/png", "image/jpg"];
+    const validFormats = ["image/jpeg", "image/png", "image/jpg",'image/webp'];
     const maxSizeMB = 3;
 
     if (!validFormats.includes(image.type)) {

@@ -14,7 +14,7 @@ function NavItems() {
         const response = await axios.get(`${apiLink}`);
         setDate(response.data);
       } catch (error) {
-        setError("Error fetching Categories data ", error);
+        setError("Error fetching Categories data ", error.message);
       } finally {
         setLoading(false);
       }

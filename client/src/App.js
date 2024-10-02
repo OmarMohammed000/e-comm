@@ -27,11 +27,13 @@ import Users from "./pages/admin/Users";
 import Tags from "./pages/admin/Tags";
 import Subcategory from "./pages/admin/Subcategory";
 import Categories from "./pages/admin/Categories";
+import ErrorComponent from "./components/ErrorComponent";
 
 
 const router=createBrowserRouter([{
   path:'/',
-  element:<MainPage></MainPage>
+  element:<MainPage></MainPage>,
+  errorElement:<ErrorComponent></ErrorComponent>
 },{
   path:`/search`,
   element:<SearchResult></SearchResult>

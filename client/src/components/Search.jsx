@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { IconButton, Stack, Autocomplete, TextField, InputAdornment } from "@mui/material";
+import {
+  IconButton,
+  Stack,
+  Autocomplete,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,50 +19,48 @@ function SearchComponent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const searchInputRef = useRef(null);
-  const debounceTimeoutRef = useRef(null); // Ref for debounce timeout
+  const debounceTimeoutRef = useRef(null);
 
-  // Toggle search bar visibility
   const handleSearchIconClick = () => {
     setIsSearchOpen((prev) => !prev);
     if (!isSearchOpen) {
       setTimeout(() => {
-        searchInputRef.current?.focus(); // Focus the input field after the search box is visible
+        searchInputRef.current?.focus();
       }, 0);
     }
   };
 
-  // Debounced search input change handler
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchInput(value);
 
     if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current); // Clear previous timeout
+      clearTimeout(debounceTimeoutRef.current);
     }
 
     debounceTimeoutRef.current = setTimeout(() => {
       if (value) {
         fetchSearchResults(value);
       } else {
-        setSearchlist([]); // Reset if input is cleared
+        setSearchlist([]);
       }
-    }, 500); // 500ms delay for debouncing
+    }, 500);
   };
 
-  // Fetch search results from API
   const fetchSearchResults = async (query) => {
     setLoading(true);
     try {
-      const response = await axios.get(`${apiLink}/product/search?product=${query}`);
+      const response = await axios.get(
+        `${apiLink}/product/search?product=${query}`
+      );
       setSearchlist(response.data);
     } catch (error) {
-      setError("Error fetching products");
+      setError("Error fetching products " + error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle search submit and navigate
   const handleSearchSubmit = () => {
     if (searchInput) {
       navigate(`/search?query=${searchInput}`);
@@ -67,15 +71,20 @@ function SearchComponent() {
 
   return (
     <>
-      {/* Search Icon Button */}
-      <IconButton size="large" aria-label="search" color="inherit" onClick={handleSearchIconClick}>
+      <IconButton
+        size="large"
+        aria-label="search"
+        color="inherit"
+        onClick={handleSearchIconClick}
+      >
         <SearchIcon sx={{ display: displayStyle }} />
       </IconButton>
 
-      {/* Conditionally Render Search Bar */}
       {isSearchOpen && (
-        <Stack spacing={2} sx={{ width: 300, borderRadius: "5px", padding: "10px" }}>
-          {/* Autocomplete Search Input */}
+        <Stack
+          spacing={2}
+          sx={{ width: 300, borderRadius: "5px", padding: "10px" }}
+        >
           <Autocomplete
             freeSolo
             disableClearable
@@ -89,9 +98,20 @@ function SearchComponent() {
                 variant="outlined"
                 size="small"
                 value={searchInput}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearchSubmit();
+                  }
+                }}
                 onChange={handleSearchChange}
                 onBlur={handleSearchIconClick}
-                sx={{ flex: 1, "& .MuiInputBase-root": { borderRadius: "5px", bgcolor: "#f5f5f5" } }}
+                sx={{
+                  flex: 1,
+                  "& .MuiInputBase-root": {
+                    borderRadius: "5px",
+                    bgcolor: "#f5f5f5",
+                  },
+                }}
                 slotProps={{
                   input: {
                     ...params.InputProps,
@@ -100,6 +120,7 @@ function SearchComponent() {
                       <InputAdornment position="end">
                         <IconButton
                           onClick={handleSearchSubmit}
+                         
                           edge="end"
                           size="small"
                           disabled={loading || !searchInput}
