@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "DB_USER": "postgres",
+    "DB_HOST": "localhost",
+    "DB_DATABASE": "ecomm",
+    "DB_PASSWORD": "thebig",
+    "DB_PORT": "5432",
+    "SESSION_SECRET": "8047e04b1d6b78cb0583e8d1c4d28cd7f860b4cb0e321c0945e3a35776b51328d5a7b9bc024ba7f2",
+    "JWT_REFRESH_SECRET": "87870af9ff3d62c3240c5c4c07afe2b8e4bc6cf31bfeacdb5dc64f936d1da1d99a4d58e734c4a02012088ab506087a469509a5c74a077c9f4cf6b2205ea59dd4",
+    "JWT_SECRET": "748e87918fd89f690018646ec0825956150c76023be129fccfcd7a724e85dcc04e6434c3aea4539e2711473cd141e44e34a40a8bb1d53b89658940445aafcc94",
+    "PORT": "4000",
+    "CLOUDINARY_CLOUD_NAME": "dy7r2qdi0",
+    "CLOUDINARY_API_KEY": "123718137821337",
+    "CLOUDINARY_SECRET_KEY": "m9EWy1a5t-SMtlayu2xrqej2AuE",
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://e-comm-gray-one.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,PUT,DELETE,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type,Authorization"
+        }
+      ]
+    }
+  ]
+}
