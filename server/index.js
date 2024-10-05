@@ -56,11 +56,11 @@ app.use("/", home);
 app.use("/", cart);
 app.use("/", order);
 app.use("/", products);
-
+const PORT = process.env.PORT || 4000; 
 db.sequelize
   .sync({ force: false, alter: true })
   .then(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Server is running on port ${process.env.PORT}`);
     });
   })
