@@ -1,5 +1,5 @@
 import express from "express";
-import readSubcategory from "../../controllers/admin/readSubCategory.js";
+import readSubcategory from "../../controllers/admin/readSubcategory.js";
 import createSubcategory from "../../controllers/admin/createSubcategory.js";
 import updateSubcategory from "../../controllers/admin/updateSubcategory.js";
 import deleteSubcategory from "../../controllers/admin/deleteSubcategory.js";
