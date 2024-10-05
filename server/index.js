@@ -58,7 +58,7 @@ app.use("/", order);
 app.use("/", products);
 const PORT = process.env.PORT || 4000; 
 db.sequelize
-  .sync({ force: false, alter: true })
+  .sync()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
