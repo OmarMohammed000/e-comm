@@ -15,7 +15,7 @@ const Category = (sequelize) => {
     }
   }, {
     tableName: 'categories',
-    timestamps: fals
+    timestamps: false
   });
 }
 
