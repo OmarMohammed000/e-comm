@@ -36,7 +36,7 @@
               withCredentials: true,
               headers: { Authorization: `Bearer ${accessToken}` },
             });
-            console.log(user)
+            
             setUser(response.data.user);
           } catch (error) {
             console.log("Failed to fetch user from JWT", error.response);
@@ -67,7 +67,7 @@
 
     const login = async (formData) => {
       try {
-        const response = await axios.post(`${apiLink}/login`, formData);
+        const response = await axios.post(`${apiLink}/login`, formData,{withCredentials:true});
         const { accessToken, refreshToken, user } = response.data;
 
         localStorage.setItem('accessToken', accessToken);

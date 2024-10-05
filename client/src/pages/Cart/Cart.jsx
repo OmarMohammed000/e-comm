@@ -151,7 +151,7 @@ function Cart() {
           </Grid2>
         ) : (
           <>
-            <Grid2 size={8} sx={{ height: "50vh" }}>
+            <Grid2 size={8}>
               <Container
                 sx={{
                   display: "flex",
