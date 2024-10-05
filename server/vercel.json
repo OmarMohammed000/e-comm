@@ -13,11 +13,10 @@
     }
   ],
   "env": {
-    "DATABASE_URL": "@database_url",
     "DB_USER": "postgres",
-    "DB_HOST": "localhost",
+    "DB_HOST": "trendy-fit.czmok0ie0g7h.eu-north-1.rds.amazonaws.com",
     "DB_DATABASE": "ecomm",
-    "DB_PASSWORD": "thebig",
+    "DB_PASSWORD": "rV2*o2Yn5i",
     "DB_PORT": "5432",
     "SESSION_SECRET": "8047e04b1d6b78cb0583e8d1c4d28cd7f860b4cb0e321c0945e3a35776b51328d5a7b9bc024ba7f2",
     "JWT_REFRESH_SECRET": "87870af9ff3d62c3240c5c4c07afe2b8e4bc6cf31bfeacdb5dc64f936d1da1d99a4d58e734c4a02012088ab506087a469509a5c74a077c9f4cf6b2205ea59dd4",

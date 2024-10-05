@@ -20,7 +20,13 @@ const sequelize = new Sequelize(
   config.development.password,
   {
     host: config.development.host,
-    dialect: "postgres",
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false 
+      }
+    }
   }
 );
 const db = {};

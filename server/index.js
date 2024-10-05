@@ -29,7 +29,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", 
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 24 * 60 * 60 * 1000,
     },
@@ -38,10 +38,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use(cors({
-  origin: "http://localhost:3000", 
-  credentials: true, 
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -55,8 +57,13 @@ app.use("/", cart);
 app.use("/", order);
 app.use("/", products);
 
-db.sequelize.sync().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+db.sequelize
+  .sync({ force: false, alter: true })
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Error syncing database & tables: ", err);
   });
-});
