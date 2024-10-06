@@ -17,6 +17,7 @@ import cart from "./routes/cart.js";
 import products from "./routes/product.js";
 
 const app = express();
+app.set('trust proxy', 1); 
 initialize(passport);
 env.config();
 
@@ -35,7 +36,6 @@ app.use(
     },
   })
 );
-app.set('trust proxy', 1); 
 
 app.use(passport.initialize());
 app.use(passport.session());
