@@ -5,48 +5,44 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 function loginApp(req, res, next) {
-  // Use Passport's 'local' strategy to authenticate
   passport.authenticate("local", (err, user, info) => {
     if (err) {
-      return next(err); // Pass any errors to Express
+      return next(err); // Handle errors from Passport
     }
     if (!user) {
       return res.status(401).json({ message: info.message || "Login failed" });
     }
 
-    // Log the user in if authentication succeeds
-    req.logIn(user, (err) => {
+    
+    req.logIn(user, async (err) => {
       if (err) {
-        return next(err); // Pass any errors to Express
+        return next(err); 
       }
 
-      // Destructure the needed user attributes
       const { email, user_name, isAdmin, phone, address } = user;
 
-      // Implement the JWT but only if user is admin
       if (isAdmin) {
+        // Admin: Issue JWT tokens
         const accessToken = jwt.sign(
           { id: user.id, email: user.email },
           JWT_SECRET,
           { expiresIn: "30m" }
         );
 
-        // Refresh token
         const refreshToken = jwt.sign({ id: user.id }, JWT_REFRESH_SECRET, {
           expiresIn: "7d",
         });
 
-        // Update the user with the refresh token (assuming this is a Sequelize model)
-        user.update({ refreshToken });
+        // Update user with refresh token and save it
+        await user.update({ refreshToken });
 
-        // Set JWT token in the cookies
+        // Set JWT access token as an HttpOnly cookie
         res.cookie("jwt", accessToken, {
           httpOnly: true,
-          secure: true,
+          secure: true, // Ensure this is only sent over HTTPS in production
           sameSite: "strict",
         });
 
-        // Send a success response with user details and tokens
         return res.json({
           message: "Login successful",
           user: {
@@ -57,10 +53,10 @@ function loginApp(req, res, next) {
             address,
           },
           accessToken,
-          refreshToken,
+          refreshToken, // You may want to issue refreshToken as HttpOnly cookie as well
         });
       } else {
-        // If not admin, just return the user details without JWT tokens
+        // Non-admin: No JWT, just establish the session
         return res.json({
           message: "Login successful",
           user: {
@@ -73,7 +69,7 @@ function loginApp(req, res, next) {
         });
       }
     });
-  })(req, res, next); // Pass the request to Passport's authenticate middleware
+  })(req, res, next);
 }
 
 export default loginApp;
