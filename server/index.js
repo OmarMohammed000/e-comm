@@ -29,12 +29,14 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: false ,
+      secure:  process.env.NODE_ENV === 'production' ,
       sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
+app.set('trust proxy', 1); 
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
@@ -44,9 +46,6 @@ app.use(
     credentials: true,
   })
 );
-
-app.use(express.urlencoded({ extended: true }));
-
 app.use("/", registerRoute);
 app.use("/", loginRoute);
 app.use("/", logout);
