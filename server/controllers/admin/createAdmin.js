@@ -1,5 +1,5 @@
 import db from "../../models/index.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 async function createAdmin(req,res) {
     const {userName,password,email,isAdmin}=req.body;
 

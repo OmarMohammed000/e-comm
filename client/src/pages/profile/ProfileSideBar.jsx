@@ -14,6 +14,12 @@ function ProfileSideBar() {
       console.error("Logout failed", error); // Handle logout error
     }
   };
+  const handleProfile=()=>{
+    navigate("/profile")
+  }
+  const handleOrder=()=>{
+    navigate("/profile/orderHistory")
+  }
   return (
     <>
       {/* Sidebar */}
@@ -39,7 +45,7 @@ function ProfileSideBar() {
               underline="hover"
               color="secondary.main"
               sx={{ mb: 1 }}
-              href="/Profile"
+              onClick={handleProfile}
             >
               Profile Settings
             </Link>
@@ -48,7 +54,7 @@ function ProfileSideBar() {
               underline="hover"
               color="secondary.main"
               sx={{ mb: 1 }}
-              href="/profile/orderHistory"
+              onClick={handleOrder}
             >
               Order History
             </Link>

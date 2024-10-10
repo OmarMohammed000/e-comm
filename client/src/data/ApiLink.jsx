@@ -1,3 +1,3 @@
-const apiLink="https://e-comm-zp3y.onrender.com";
+const apiLink="http://localhost:4000";
 
 export default apiLink;

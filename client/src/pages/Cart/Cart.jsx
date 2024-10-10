@@ -26,6 +26,7 @@ import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import apiLink from "../../data/ApiLink";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -98,7 +99,7 @@ function Cart() {
     };
 
     try {
-      const response = await axios.post("/orders", orderData);
+      const response = await axios.post(`${apiLink}/orders`, orderData,{withCredentials:true});
       console.log("Order successful:", response.data);
       handleClearCart();
       navigate("/order/successful");

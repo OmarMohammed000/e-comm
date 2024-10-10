@@ -173,7 +173,12 @@ import apiLink from "../../data/ApiLink";
 
       return isValid;
     };
-
+    const handleRegister=()=>{
+      navigate("/register")
+    }
+    const handlelogin=()=>{
+      navigate("/login")
+    }
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
@@ -290,9 +295,9 @@ import apiLink from "../../data/ApiLink";
               <Typography sx={{ textAlign: "center" }}>
                 {register ? (
                   <>
-                    Already have an account?{" "}
+                    Already have an account?
                     <Link
-                      href="/login"
+                      onClick={handlelogin}
                       variant="body2"
                       sx={{ alignSelf: "center" }}
                     >
@@ -303,7 +308,7 @@ import apiLink from "../../data/ApiLink";
                   <>
                     Don&apos;t have an account?{" "}
                     <Link
-                      href="/register"
+                      onClick={handleRegister}
                       variant="body2"
                       sx={{ alignSelf: "center" }}
                     >

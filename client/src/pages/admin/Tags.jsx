@@ -25,6 +25,7 @@ import {
 import React, { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 import axios from "axios";
+import apiLink from "../../data/ApiLink";
 
 // Styled Table Components
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -59,7 +60,7 @@ function Tags() {
   useEffect(() => {
     const getTags = async () => {
       try {
-        const response = await axios.get("/admin/tags");
+        const response = await axios.get(`${apiLink}/admin/tags`);
         setTags(response.data);
       } catch (error) {
         setError("Error fetching tags " + error.message);

@@ -17,7 +17,7 @@ import cart from "./routes/cart.js";
 import products from "./routes/product.js";
 
 const app = express();
-app.set('trust proxy', 1); 
+
 initialize(passport);
 env.config();
 
@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://e-comm-gray-one.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
